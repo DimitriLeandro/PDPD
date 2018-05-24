@@ -24,6 +24,7 @@ public class MainPDPD extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnClasseA = new javax.swing.JButton();
         btnClasseAB = new javax.swing.JButton();
+        btnFechar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -53,6 +54,13 @@ public class MainPDPD extends javax.swing.JFrame {
             }
         });
 
+        btnFechar.setText("Fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -60,6 +68,7 @@ public class MainPDPD extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClasseA, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClasseAB, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(44, Short.MAX_VALUE))
@@ -71,6 +80,8 @@ public class MainPDPD extends javax.swing.JFrame {
                 .addComponent(btnClasseAB, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnClasseA, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -79,15 +90,22 @@ public class MainPDPD extends javax.swing.JFrame {
 
     private void btnClasseABActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClasseABActionPerformed
         objMainClasseA = new MainClasseA(this);
-        objMainClasseA.setVisible(true);
         this.setVisible(false);
+        objMainClasseA.setVisible(true);
     }//GEN-LAST:event_btnClasseABActionPerformed
 
     private void btnClasseAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClasseAActionPerformed
         objMainClasseAB = new MainClasseAB(this);
-        objMainClasseAB.setVisible(true);
         this.setVisible(false);
+        objMainClasseAB.setVisible(true);
     }//GEN-LAST:event_btnClasseAActionPerformed
+
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+        this.objMainClasseA = null;
+        this.objMainClasseAB = null;
+        
+        this.dispose();
+    }//GEN-LAST:event_btnFecharActionPerformed
 
     public static void main(String args[]) {
         /* Create and display the form */
@@ -101,6 +119,7 @@ public class MainPDPD extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClasseA;
     private javax.swing.JButton btnClasseAB;
+    private javax.swing.JButton btnFechar;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

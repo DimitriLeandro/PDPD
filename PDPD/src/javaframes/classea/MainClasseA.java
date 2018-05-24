@@ -8,6 +8,9 @@ public class MainClasseA extends javax.swing.JFrame {
 
     private float ib;
     private MainPDPD objMainFramePDPD;
+    private AnaliseDCClasseAFrame objAnaliseDCFrame;
+    private AnaliseACClasseAFrame objAC;
+    private RespostaFrequenciaClasseAFrame objRF;
 
     public MainClasseA(MainPDPD obj) {
         initComponents();
@@ -258,7 +261,7 @@ public class MainClasseA extends javax.swing.JFrame {
 
     private void btnAnaliseDCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnaliseDCActionPerformed
         //A análise DC retorna o valor Ie para que seja possível fazer a análise AC.
-        AnaliseDCClasseAFrame objAnaliseDCFrame = new AnaliseDCClasseAFrame(
+        objAnaliseDCFrame = new AnaliseDCClasseAFrame(
                 this,
                 Float.parseFloat(this.txtR1.getText()),
                 Float.parseFloat(this.txtR2.getText()),
@@ -270,8 +273,8 @@ public class MainClasseA extends javax.swing.JFrame {
 
         this.setIb(objAnaliseDCFrame.getIb());
 
-        objAnaliseDCFrame.setVisible(true);
         this.setVisible(false);
+        objAnaliseDCFrame.setVisible(true);        
     }//GEN-LAST:event_btnAnaliseDCActionPerformed
 
     private void btnAnaliseACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnaliseACActionPerformed
@@ -279,7 +282,7 @@ public class MainClasseA extends javax.swing.JFrame {
         if (this.getIb() == 0.0) {
             JOptionPane.showMessageDialog(null, "É necessário fazer a análise DC primeiro");
         } else {
-            AnaliseACClasseAFrame objAC = new AnaliseACClasseAFrame(
+            objAC = new AnaliseACClasseAFrame(
                     this,
                     Float.parseFloat(this.txtVin.getText()),
                     Float.parseFloat(this.txtRin.getText()),
@@ -300,7 +303,7 @@ public class MainClasseA extends javax.swing.JFrame {
         if (this.getIb() == 0.0) {
             JOptionPane.showMessageDialog(null, "É necessário fazer a análise DC primeiro");
         } else {
-            RespostaFrequenciaClasseAFrame objRF = new RespostaFrequenciaClasseAFrame(
+            objRF = new RespostaFrequenciaClasseAFrame(
                     this,
                     Float.parseFloat(this.txtVin.getText()),
                     Float.parseFloat(this.txtRin.getText()),
@@ -322,6 +325,7 @@ public class MainClasseA extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRespostaFrequenciaActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        this.setVisible(false);
         objMainFramePDPD.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed

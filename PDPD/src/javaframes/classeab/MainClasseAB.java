@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class MainClasseAB extends javax.swing.JFrame {
 
     private MainPDPD objMainFramePDPD;
-    
+
     public MainClasseAB(MainPDPD obj) {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -32,6 +32,8 @@ public class MainClasseAB extends javax.swing.JFrame {
         txtRL = new javax.swing.JTextField();
         txtIc = new javax.swing.JTextField();
         btnAnalisar = new javax.swing.JButton();
+        txtVDiodo = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Análise Classe AB");
@@ -53,9 +55,9 @@ public class MainClasseAB extends javax.swing.JFrame {
 
         txtImpSaida.setText("8");
 
-        jLabel3.setText("RL (Ohms):");
+        jLabel3.setText("Resistência da Carga RL (Ohms):");
 
-        jLabel4.setText("Ic (A):");
+        jLabel4.setText("Corrente de coletor (A):");
 
         txtRL.setText("8");
 
@@ -67,6 +69,10 @@ public class MainClasseAB extends javax.swing.JFrame {
                 btnAnalisarActionPerformed(evt);
             }
         });
+
+        txtVDiodo.setText("0.65");
+
+        jLabel5.setText("Tensão aproximada dos diodos (V):");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,14 +88,16 @@ public class MainClasseAB extends javax.swing.JFrame {
                     .addComponent(txtRL)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtIc)
+                    .addComponent(btnAnalisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtVDiodo)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnAnalisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -114,7 +122,11 @@ public class MainClasseAB extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtIc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtVDiodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
                         .addComponent(btnAnalisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -125,6 +137,7 @@ public class MainClasseAB extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        this.setVisible(false);
         objMainFramePDPD.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
@@ -135,18 +148,36 @@ public class MainClasseAB extends javax.swing.JFrame {
         double potPre = Double.parseDouble(txtPotPre.getText());
         double ic = Double.parseDouble(txtIc.getText());
         double zout = Double.parseDouble(txtImpSaida.getText());
-        
+        double vDiodo = Double.parseDouble(txtVDiodo.getText());
+
         //calculando VCC
         double vcc = Math.sqrt(zout * rl * potPre);
-        
+
         //calculando os valores dos resistores (Tensão no diodo = 0,65 e também considerando que os resistores são iguais)
-        double vr1 = (vcc - (2 * 0.65))/2;
-        
-        //calculando o valor dos resistores com a lei de ohm
-        
-        
+        double vr1 = (vcc - (2 * vDiodo)) / 2;
+
+        //calculando o valor dos resistores com a lei de ohm (espelho de corrente)
+        double r1 = vr1 / ic;
+
+        //potência da fonte
+        double potFonte = ((Math.pow(vcc, 2)) / (2 * Math.PI * rl));
+
+        //rendimento da fonte
+        double n = 100 * (potPre / potFonte);
+
+        //potencia dissipada transistores
+        double potQ1 = ((Math.pow(vcc, 2)) / (4 * (Math.pow(Math.PI, 2)) * rl));
+
         //exibindo
-        String resultado = "Vcc: " + vcc + "\nVr1: " + vr1 + "\nVr2: " + vr1;
+        String resultado
+                = "Vcc: " + String.format("%.3f", vcc) + " V"
+                + "\nVr1: " + String.format("%.3f", vr1) + " V"
+                + "\nVr2: " + String.format("%.3f", vr1) + " V"
+                + "\nR1: " + String.format("%.3f", r1) + " Ohms"
+                + "\nR2: " + String.format("%.3f", r1) + " Ohms"
+                + "\nPotência dissipada pela fonte: " + String.format("%.3f", potFonte) + " W"
+                + "\nRendimento da fonte: " + String.format("%.3f", n) + "%" 
+                + "\nPotência dissipada pelos transistores: " + String.format("%.3f", potQ1) + " W";
         JOptionPane.showMessageDialog(null, resultado, "Resultados", 1);
     }//GEN-LAST:event_btnAnalisarActionPerformed
 
@@ -158,9 +189,11 @@ public class MainClasseAB extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField txtIc;
     private javax.swing.JTextField txtImpSaida;
     private javax.swing.JTextField txtPotPre;
     private javax.swing.JTextField txtRL;
+    private javax.swing.JTextField txtVDiodo;
     // End of variables declaration//GEN-END:variables
 }
