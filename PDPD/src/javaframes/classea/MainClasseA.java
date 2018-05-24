@@ -100,18 +100,8 @@ public class MainClasseA extends javax.swing.JFrame {
         txtVcc.setText("12");
 
         txtVin.setText("0.01");
-        txtVin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtVinActionPerformed(evt);
-            }
-        });
 
         txtR1.setText("12000");
-        txtR1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtR1ActionPerformed(evt);
-            }
-        });
 
         txtR2.setText("2200");
 
@@ -122,11 +112,6 @@ public class MainClasseA extends javax.swing.JFrame {
         txtRin.setText("50");
 
         txtRl.setText("12000");
-        txtRl.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRlActionPerformed(evt);
-            }
-        });
 
         txtC1.setText("0.000001");
 
@@ -135,11 +120,6 @@ public class MainClasseA extends javax.swing.JFrame {
         txtC3.setText("0.000001");
 
         txtQ1.setText("100");
-        txtQ1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQ1ActionPerformed(evt);
-            }
-        });
 
         btnAnaliseAC.setText("Análise AC");
         btnAnaliseAC.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +207,7 @@ public class MainClasseA extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(txtVcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(txtVin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
@@ -293,22 +273,6 @@ public class MainClasseA extends javax.swing.JFrame {
         objAnaliseDCFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAnaliseDCActionPerformed
-
-    private void txtRlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRlActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRlActionPerformed
-
-    private void txtR1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtR1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtR1ActionPerformed
-
-    private void txtQ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQ1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtQ1ActionPerformed
-
-    private void txtVinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVinActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtVinActionPerformed
 
     private void btnAnaliseACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnaliseACActionPerformed
         //System.out.println(""+this.getIe()+"\n"+this.getIc());
